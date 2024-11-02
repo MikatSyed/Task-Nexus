@@ -55,7 +55,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
       onRequestClose={onCancel}
       overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center"
       className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg mx-auto outline-none"
-      ariaHideApp={false} // Set to true in production with setAppElement
+      ariaHideApp={false} 
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center text-teal-600 font-semibold text-xl">

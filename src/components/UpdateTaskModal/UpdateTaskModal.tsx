@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import { MdOutlineAddTask } from 'react-icons/md';
 import { CgClose } from 'react-icons/cg';
@@ -33,7 +33,8 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
   const loadedTasks: Task[] = loadFromLocalStorage('tasks', []);
   const task: any = loadedTasks.find((task:any) => task.id === taskId);
   console.log(task?.assignee,'35')
-  const [assignee, setAssignee] = useState<string>(task?.assignee || '');
+  const [assignee, setAssignee] = useState<string>(task?.assignee);
+  console.log(assignee,'37')
 
   const onSubmit = async (values: any) => {
     values.assignee = assignee; 
@@ -58,9 +59,11 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
   const defaultValues = {
     title: task?.title || '',
     description: task?.description || '',
-    assignee: assignee || '',
     dueDate: task?.dueDate || '',
   };
+
+ 
+
 
   return (
     <ReactModal
@@ -106,6 +109,7 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
             name="assignee"
             className="mt-2 w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
             value={assignee}
+            defaultValue={task?.assignee}
             onChange={(e) => setAssignee(e.target.value)}
           >
             <option value="">Select Assignee</option>

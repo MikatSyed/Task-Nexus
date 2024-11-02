@@ -78,12 +78,12 @@ const ProjectDetails = () => {
         members={teamMembers}
         onTaskAdded={handleAddTask}
       />
-      <div className="container mx-auto ">
+      <div className="container mx-auto mt-12">
         <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-  <h1 className="text-2xl font-semibold text-gray-800">{title}</h1>
+  <h1 className="text-3xl font-semibold text-gray-800">{title}</h1>
   <button 
-    className="flex items-center bg-teal-600 hover:bg-teal-700 text-white rounded-lg h-10 px-4 py-2 border-none cursor-pointer transition duration-200 ease-in-out transform hover:scale-105"
+    className="flex items-center bg-teal-500 hover:bg-teal-600 text-white rounded-lg h-10 px-4 py-2 border-none cursor-pointer "
     onClick={showModal}
   >
     <FaPlus className="mr-2" /> Add Task

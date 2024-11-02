@@ -15,6 +15,9 @@ export type Task = {
     status: 'Not Started' | 'In Progress' | 'Completed'; // Added status
     progress: number; // Progress as a percentage (0-100)
     dueDate: string; // ISO date string (e.g., "2024-12-31")
+    priority:string;
+    teamMembers:string[];
+    budget:number;
   };
   
   export const projectData: { projects: Project[] } = {
@@ -25,8 +28,11 @@ export type Task = {
         description:
           "Revamp the user interface and functionality of the e-commerce website to enhance user experience and increase conversions.",
         status: "In Progress",
+        priority: "High",
         progress: 45,
         dueDate: "2024-12-15",
+        teamMembers: ["Alice", "Bob", "Charlie"],
+        budget: 15000,
       },
       {
         id: "2",
@@ -34,8 +40,11 @@ export type Task = {
         description:
           "Develop a cross-platform mobile application that allows users to browse and purchase products seamlessly on their devices.",
         status: "Not Started",
+        priority: "Medium",
         progress: 0,
         dueDate: "2025-03-01",
+        teamMembers: ["Daisy", "Eve"],
+        budget: 30000,
       },
       {
         id: "3",
@@ -43,8 +52,11 @@ export type Task = {
         description:
           "Implement SEO strategies to improve the visibility and ranking of the blog on search engines, aiming for higher organic traffic.",
         status: "Completed",
+        priority: "Low",
         progress: 100,
         dueDate: "2024-09-30",
+        teamMembers: ["Frank"],
+        budget: 5000,
       },
       {
         id: "4",
@@ -52,8 +64,11 @@ export type Task = {
         description:
           "Create and execute a comprehensive marketing campaign across multiple social media platforms to boost brand awareness and engagement.",
         status: "In Progress",
+        priority: "High",
         progress: 70,
         dueDate: "2024-11-20",
+        teamMembers: ["Grace", "Hank"],
+        budget: 12000,
       },
       {
         id: "5",
@@ -61,11 +76,15 @@ export type Task = {
         description:
           "Design and develop a data analytics dashboard that provides insights into sales performance and customer behavior.",
         status: "In Progress",
+        priority: "Medium",
         progress: 60,
         dueDate: "2025-01-10",
+        teamMembers: ["Ivy", "Jack", "Ken"],
+        budget: 20000,
       },
     ],
   };
+  
   
   
   export const teamMembers = ["Alice", "Bob", "Charlie", "David", "Eve"];
