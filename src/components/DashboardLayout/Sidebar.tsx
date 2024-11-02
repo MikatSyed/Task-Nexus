@@ -49,23 +49,23 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
         </div>
         <nav className="mt-6 flex-1">
           <ul>
-            <li>
+          <li>
               <Link
                 to="/dashboard"
-                className={`flex items-center p-4 hover:bg-gray-700 rounded-md mx-2 ${
-                  activeItem === 'dashboard' ? 'bg-teal-500 rounded-md mx-2' : ''
+                className={`flex items-center p-4 hover:text-teal-500 mx-2 ${
+                  activeItem === 'dashboard' ? 'bg-gray-700 rounded-md mx-2  p-4' : ''
                 }`}
                 onClick={() => handleItemClick('dashboard')}
               >
-                <MdDashboard className="text-lg mr-3" />
+                <MdRestaurantMenu className="text-lg mr-3" />
                 <span>Dashboard</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/dashboard/project"
-                className={`flex items-center p-4 hover:bg-gray-700 rounded-md mx-2 ${
-                  activeItem === 'project' ? 'bg-teal-500 rounded-md mx-2' : ''
+                className={`flex items-center p-4 hover:text-teal-500 mx-2 ${
+                  activeItem === 'project' ? 'bg-gray-700 rounded-md mx-2  p-4' : ''
                 }`}
                 onClick={() => handleItemClick('project')}
               >
@@ -73,18 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
                 <span>Project</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to="/dashboard/user"
-                className={`flex items-center p-4 hover:bg-gray-700 rounded-md mx-2 ${
-                  activeItem === 'user' ? 'bg-teal-500 rounded-md mx-2' : ''
-                }`}
-                onClick={() => handleItemClick('user')}
-              >
-                <MdPerson className="text-lg mr-3" />
-                <span>User</span>
-              </Link>
-            </li>
+         
           </ul>
         </nav>
         <div className="p-4 border-t border-gray-700">

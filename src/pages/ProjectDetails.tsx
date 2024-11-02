@@ -7,7 +7,8 @@ import { loadFromLocalStorage } from '../stores/taskStore';
 import FilterSection from '../components/FilterSection/FilterSection';
 import { useParams } from 'react-router-dom';
 import TaskList from '../components/TaskList/Tasklist';
-
+import TaskManagement from '../components/TaskManagement/TaskManagement';
+import TeamMember from '../components/TeamMember/TeamMember';
 
 
 
@@ -114,9 +115,9 @@ const ProjectDetails = () => {
           </div>
 
           <TaskList filteredTasks={filteredTasks} onTaskAdded={handleAddTask} />
-        
+          <TaskManagement tasks={filteredTasks} onTaskAdded={handleAddTask} />
 
-         
+          <TeamMember teamMembers={teamMembers} />
         </div>
       </div>
     </>
