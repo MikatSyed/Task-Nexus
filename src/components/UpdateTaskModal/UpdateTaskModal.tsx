@@ -20,39 +20,37 @@ interface AddTaskModalProps {
   onTaskAdded: () => void;
 }
 
-const UpdateTaskModal: React.FC<AddTaskModalProps> = ({ 
-  title, 
-  visible, 
-  onCancel, 
-  projectId, 
+const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
+  title,
+  visible,
+  onCancel,
+  projectId,
   taskId,
-  members, 
-  onTaskAdded 
+  members,
+  onTaskAdded
 }) => {
- 
   const loadedTasks: Task[] = loadFromLocalStorage('tasks', []);
-  const task: any = loadedTasks.find((task:any) => task.id === taskId);
-  console.log(task?.assignee,'35')
+  const task: any = loadedTasks.find((task: any) => task.id === taskId);
+  
   const [assignee, setAssignee] = useState<string>(task?.assignee);
-  console.log(assignee,'37')
+  const [priority, setPriority] = useState<string>(task?.priority || ''); // State for priority
 
   const onSubmit = async (values: any) => {
-    values.assignee = assignee; 
-    values.status = values.status || task?.status; 
-    values.serviceId =  projectId;
-    const toastId = toast.loading('Updating...')
+    values.assignee = assignee;
+    values.priority = priority; // Include priority in the values
+    values.status = values.status || task?.status;
+    values.serviceId = projectId;
+    const toastId = toast.loading('Updating...');
     try {
       useTaskStore.getState().updateTask(task?.id, values);
       onTaskAdded();
       toast.success("Task Updated Successfully");
       onCancel();
     } catch (err: any) {
-   
       toast.error('Failed to update task. Please try again.');
       onCancel();
-    }finally{
-
-      toast.dismiss(toastId)
+    } finally {
+      toast.dismiss(toastId);
     }
   };
 
@@ -62,16 +60,13 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
     dueDate: task?.dueDate || '',
   };
 
- 
-
-
   return (
     <ReactModal
       isOpen={visible}
       onRequestClose={onCancel}
       overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center"
       className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg mx-auto outline-none"
-      ariaHideApp={false} 
+      ariaHideApp={false}
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center text-teal-600 font-semibold text-xl">
@@ -109,7 +104,6 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
             name="assignee"
             className="mt-2 w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
             value={assignee}
-            defaultValue={task?.assignee}
             onChange={(e) => setAssignee(e.target.value)}
           >
             <option value="">Select Assignee</option>
@@ -118,6 +112,27 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
                 {member}
               </option>
             ))}
+          </select>
+        </div>
+
+        <div className="w-full mb-4">
+          <label
+            htmlFor="priority"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Priority
+          </label>
+          <select
+            id="priority"
+            name="priority"
+            className="mt-2 w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option value="">Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
         </div>
 

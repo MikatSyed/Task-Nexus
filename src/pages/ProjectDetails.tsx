@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import AddTaskModal from '../components/AddTaskModal/AddTaskModal';
@@ -10,15 +9,12 @@ import TaskList from '../components/TaskList/Tasklist';
 import TaskManagement from '../components/TaskManagement/TaskManagement';
 import TeamMember from '../components/TeamMember/TeamMember';
 
-
-
-
-
 const ProjectDetails = () => {
   const { id } = useParams(); 
   const [statusFilter, setStatusFilter] = useState<string>('');
   const [dueDateFilter, setDueDateFilter] = useState<string>('');
   const [assigneeFilter, setAssigneeFilter] = useState<string>(''); 
+  const [priorityFilter, setPriorityFilter] = useState<string>(''); // New state for priority filter
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -49,14 +45,16 @@ const ProjectDetails = () => {
     setStatusFilter('');
     setDueDateFilter('');
     setAssigneeFilter('');
+    setPriorityFilter(''); // Reset priority filter
     loadTasks(); // Reload all tasks
   };
 
-  const filteredTasks = tasks.filter((task:any) => {
+  const filteredTasks = tasks.filter((task: any) => {
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     if (statusFilter && task.status !== statusFilter) return false;
     if (dueDateFilter && task.dueDate !== dueDateFilter) return false;
     if (assigneeFilter && task.assignee !== assigneeFilter) return false;
+    if (priorityFilter && task.priority !== priorityFilter) return false; // Filter by priority
     return true;
   });
 
@@ -80,31 +78,19 @@ const ProjectDetails = () => {
       />
       <div className="container mx-auto mt-12">
         <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-  <h1 className="text-3xl font-semibold text-gray-800">{title}</h1>
-  <button 
-    className="flex items-center bg-teal-500 hover:bg-teal-600 text-white rounded-lg h-10 px-4 py-2 border-none cursor-pointer "
-    onClick={showModal}
-  >
-    <FaPlus className="mr-2" /> Add Task
-  </button>
-</div>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-semibold text-gray-800">{title}</h1>
+            <button 
+              className="flex items-center bg-teal-500 hover:bg-teal-600 text-white rounded-lg h-10 px-4 py-2 border-none cursor-pointer "
+              onClick={showModal}
+            >
+              <FaPlus className="mr-2" /> Add Task
+            </button>
+          </div>
 
-          <p className="text-gray-600 mb-4">{description}</p>
+          <p className="text-gray-600 my-8">{description}</p>
 
-          <FilterSection
-            statusFilter={statusFilter}
-            dueDateFilter={dueDateFilter}
-            assigneeFilter={assigneeFilter}
-            assignees={teamMembers}
-            setSearchQuery={setSearchQuery}
-            setStatusFilter={setStatusFilter}
-            setDueDateFilter={setDueDateFilter}
-            setAssigneeFilter={setAssigneeFilter}
-            onResetFilters={resetFilters} 
-          />
-
-          <div className="mb-6">
+          <div className="mt-10 mb-4">
             <input
               type="text"
               placeholder="Search tasks..."
@@ -113,6 +99,22 @@ const ProjectDetails = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+
+          <FilterSection
+            statusFilter={statusFilter}
+            dueDateFilter={dueDateFilter}
+            assigneeFilter={assigneeFilter}
+            priorityFilter={priorityFilter} 
+            assignees={teamMembers}
+            setSearchQuery={setSearchQuery}
+            setStatusFilter={setStatusFilter}
+            setDueDateFilter={setDueDateFilter}
+            setAssigneeFilter={setAssigneeFilter}
+            setPriorityFilter={setPriorityFilter} 
+            onResetFilters={resetFilters} 
+          />
+
+        
 
           <TaskList filteredTasks={filteredTasks} onTaskAdded={handleAddTask} id={id} />
           <TaskManagement tasks={filteredTasks} onTaskAdded={handleAddTask} />

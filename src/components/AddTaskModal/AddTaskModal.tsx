@@ -27,6 +27,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
   onTaskAdded 
 }) => {
   const [assignee, setAssignee] = useState<string>('');
+  const [priority, setPriority] = useState<string>(''); // State for priority
   const addTask = useTaskStore((state) => state.addTask);
 
   const onSubmit = async (values: any) => {
@@ -36,16 +37,17 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
       serviceId: projectId,
       isCompleted: false,
       assignee: assignee,
+      priority: priority, // Add priority to the new task
     };
-    const toastId = toast.loading('Posting...')
+    const toastId = toast.loading('Posting...');
     try {
       await addTask(newTask);
       onTaskAdded();
       onCancel();
     } catch (err: any) {
       console.error('Error adding task:', err.message);
-    }finally{
-      toast.dismiss(toastId)
+    } finally {
+      toast.dismiss(toastId);
     }
   };
 
@@ -101,6 +103,27 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
                 {member}
               </option>
             ))}
+          </select>
+        </div>
+
+        <div className="w-full mb-4">
+          <label
+            htmlFor="priority"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Priority
+          </label>
+          <select
+            id="priority"
+            name="priority"
+            className="mt-2 w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option value="">Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
         </div>
 
