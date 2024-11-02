@@ -12,11 +12,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState<string>(''); // State to track active item
+  const [activeItem, setActiveItem] = useState<string>(''); 
 
   const handleLogout = () => {
 
-    // Replace setUserData with appropriate handling if necessary
+   
     navigate('/');
   };
 
@@ -52,8 +52,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             <li>
               <Link
                 to="/dashboard"
-                className={`flex items-center p-4 hover:bg-gray-700 mx-2 ${
-                  activeItem === 'dashboard' ? 'bg-green-500 rounded-md mx-2' : ''
+                className={`flex items-center p-4 hover:bg-gray-700 rounded-md mx-2 ${
+                  activeItem === 'dashboard' ? 'bg-teal-500 rounded-md mx-2' : ''
                 }`}
                 onClick={() => handleItemClick('dashboard')}
               >
@@ -64,8 +64,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             <li>
               <Link
                 to="/dashboard/project"
-                className={`flex items-center p-4 hover:bg-gray-700 mx-2 ${
-                  activeItem === 'recipe' ? 'bg-green-500 rounded-md mx-2' : ''
+                className={`flex items-center p-4 hover:bg-gray-700 rounded-md mx-2 ${
+                  activeItem === 'project' ? 'bg-teal-500 rounded-md mx-2' : ''
                 }`}
                 onClick={() => handleItemClick('project')}
               >
@@ -76,8 +76,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             <li>
               <Link
                 to="/dashboard/user"
-                className={`flex items-center p-4 hover:bg-gray-700 mx-2 ${
-                  activeItem === 'user' ? 'bg-green-500 rounded-md mx-2' : ''
+                className={`flex items-center p-4 hover:bg-gray-700 rounded-md mx-2 ${
+                  activeItem === 'user' ? 'bg-teal-500 rounded-md mx-2' : ''
                 }`}
                 onClick={() => handleItemClick('user')}
               >

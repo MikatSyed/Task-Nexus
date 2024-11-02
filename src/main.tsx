@@ -5,7 +5,8 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.tsx";
 import Project from "./pages/Project.tsx";
-import DashboardLayout from "./components/Dashboard/DashboardLayout.tsx";
+import DashboardLayout from "./components/DashboardLayout/DashboardLayout.tsx";
+import ProjectDetails from "./pages/ProjectDetails.tsx";
 
 
 // Define router with correct TypeScript types
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
     element: (
       <DashboardLayout>
         <Project />
+      </DashboardLayout>
+    ),
+  },
+  {
+    path: "/dashboard/project/view/:id",
+    element: (
+      <DashboardLayout>
+        <ProjectDetails />
       </DashboardLayout>
     ),
   },

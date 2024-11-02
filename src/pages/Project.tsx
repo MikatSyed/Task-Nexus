@@ -2,12 +2,29 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { projectData } from "../utils/data";
-
+import { useTaskStore } from "../stores/taskStore";
 
 const Project = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(4);
+  
+
+  // Total number of pages
+  const totalPages = Math.ceil(projectData.projects.length / size);
+
+  // Handler for adding project phases when clicking the view button
+  const handleAddProjectPhases = async (projectId: string) => {
+    const isFirstVisit = !localStorage.getItem(`projectPhasesAdded_${projectId}`);
+
+    if (isFirstVisit && projectId) {
+      // Logic to add project phases goes here
+      localStorage.setItem(`projectPhasesAdded_${projectId}`, "true");
+      navigate(`/dashboard/project/view/${projectId}`);
+    } else {
+      navigate(`/dashboard/project/view/${projectId}`);
+    }
+  };
 
   // Get the current page of projects
   const currentPageProjects: any[] = projectData.projects.slice(
@@ -53,7 +70,7 @@ const Project = () => {
               ></div>
             </div>
             <button
-           
+              onClick={() => handleAddProjectPhases(project.id)}
               className="mt-4 bg-teal-600 hover:bg-teal-700 text-white py-1 px-3 rounded"
             >
               View Project
@@ -62,6 +79,24 @@ const Project = () => {
         ))}
       </div>
 
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+          className="mx-2 px-3 py-1 bg-teal-500 text-white rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span className="text-gray-700 mx-2">{`Page ${page} of ${totalPages}`}</span>
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+          className="mx-2 px-3 py-1 bg-teal-500 text-white rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
