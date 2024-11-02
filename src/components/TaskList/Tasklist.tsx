@@ -5,10 +5,16 @@ import { FiClock, FiUser } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { useTaskStore } from '../../stores/taskStore';
 import { Link } from 'react-router-dom';
+import UpdateTaskModal from '../UpdateTaskModal/UpdateTaskModal';
+import { teamMembers } from '../../utils/data';
+import { Toaster } from 'react-hot-toast';
 
-const TaskList = ({ filteredTasks, onTaskAdded }: any) => {
+const TaskList = ({ filteredTasks, onTaskAdded ,id}: any) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const tasksPerPage = 2; // Set the number of tasks per page
+    const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+
+    const tasksPerPage = 2; 
 
     const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
 
@@ -27,9 +33,30 @@ const TaskList = ({ filteredTasks, onTaskAdded }: any) => {
         (currentPage - 1) * tasksPerPage,
         currentPage * tasksPerPage
     );
+    const showModal = (taskId: string) => {
+        setSelectedTaskId(taskId);
+        setIsModalVisible(true);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        setSelectedTaskId(null);
+    };
+
 
     return (
         <div className="">
+               <Toaster position="top-center" reverseOrder={false} />
+             <UpdateTaskModal
+                title="Edit Task"
+                visible={isModalVisible}
+                onCancel={handleCancel}
+                projectId={id}
+                members={teamMembers}
+                onTaskAdded={onTaskAdded}
+                taskId={selectedTaskId}
+            />
+
         {filteredTasks.length > 0  && <h2 className="text-3xl font-bold mb-8 text-gray-800">Tasks</h2>}
 
             {filteredTasks.length === 0 ? (
@@ -78,14 +105,14 @@ const TaskList = ({ filteredTasks, onTaskAdded }: any) => {
                             </div>
                         </div>
             
-                        {/* Task Description */}
+                     
                         <p className="text-gray-600 mb-6 text-base leading-relaxed">{task.description}</p>
             
-                        {/* Member and Due Date Information */}
+                     
                         <div>
                             <p className="text-base text-gray-700 font-semibold flex items-center mb-3">
                                 <FiUser className="mr-2 text-gray-600" />
-                                Assign To: <span className="text-gray-600 font-normal ml-2">{task?.member}</span>
+                                Assign To: <span className="text-gray-600 font-normal ml-2">{task?.assignee}</span>
                             </p>
                         </div>
                         <div className="mb-6">
@@ -102,12 +129,12 @@ const TaskList = ({ filteredTasks, onTaskAdded }: any) => {
                         </div>
             
                         <div className="flex justify-end space-x-3">
-                            <Link to={`/dashboard/project/task/${task.id}`}>
-                                <button className="flex items-center justify-center rounded-lg bg-teal-500 text-white px-3 py-2 text-sm font-semibold border-none hover:bg-teal-500">
+                         
+                                <button onClick={() => showModal(task.id)} className="flex items-center justify-center rounded-lg bg-teal-500 text-white px-3 py-2 text-sm font-semibold border-none hover:bg-teal-500">
                                     <BiEditAlt className="mr-1" />
                                     Edit
                                 </button>
-                            </Link>
+                            
                             <button
                                 className="flex items-center justify-center rounded-lg bg-red-600 text-white px-3 py-2 text-sm font-semibold border-none hover:bg-red-500"
                                 onClick={() => deleteTask(task.id)}

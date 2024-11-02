@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { MdOutlineAddTask } from 'react-icons/md';
 import { CgClose } from 'react-icons/cg';
-import { useTaskStore } from '../../stores/taskStore';
+import { loadFromLocalStorage, useTaskStore } from '../../stores/taskStore';
 import FormInput from '../Forms/FormInput';
 import FormTextArea from '../Forms/FormTextArea';
 import FormDatePicker from '../Forms/FormDatePicker';
 import Form from '../Forms/Form';
+import { Task } from '../../utils/data';
 import toast from 'react-hot-toast';
 
 interface AddTaskModalProps {
@@ -14,39 +15,51 @@ interface AddTaskModalProps {
   visible: boolean;
   onCancel: () => void;
   projectId: string | undefined;
+  taskId: string | undefined | null;
   members: string[];
   onTaskAdded: () => void;
 }
 
-const AddTaskModal: React.FC<AddTaskModalProps> = ({ 
+const UpdateTaskModal: React.FC<AddTaskModalProps> = ({ 
   title, 
   visible, 
   onCancel, 
   projectId, 
+  taskId,
   members, 
   onTaskAdded 
 }) => {
-  const [assignee, setAssignee] = useState<string>('');
-  const addTask = useTaskStore((state) => state.addTask);
+ 
+  const loadedTasks: Task[] = loadFromLocalStorage('tasks', []);
+  const task: any = loadedTasks.find((task:any) => task.id === taskId);
+  console.log(task?.assignee,'35')
+  const [assignee, setAssignee] = useState<string>(task?.assignee || '');
 
   const onSubmit = async (values: any) => {
-    const newTask = {
-      ...values,
-      status: 'To Do',
-      serviceId: projectId,
-      isCompleted: false,
-      assignee: assignee,
-    };
-    const toastId = toast.loading('Posting...')
+    values.assignee = assignee; 
+    values.status = values.status || task?.status; 
+    values.serviceId =  projectId;
+    const toastId = toast.loading('Updating...')
     try {
-      await addTask(newTask);
+      useTaskStore.getState().updateTask(task?.id, values);
       onTaskAdded();
+      toast.success("Task Updated Successfully");
       onCancel();
     } catch (err: any) {
-      console.error('Error adding task:', err.message);
+   
+      toast.error('Failed to update task. Please try again.');
+      onCancel();
     }finally{
+
       toast.dismiss(toastId)
     }
+  };
+
+  const defaultValues = {
+    title: task?.title || '',
+    description: task?.description || '',
+    assignee: assignee || '',
+    dueDate: task?.dueDate || '',
   };
 
   return (
@@ -55,7 +68,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
       onRequestClose={onCancel}
       overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center"
       className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg mx-auto outline-none"
-      ariaHideApp={false} // Set to true in production with setAppElement
+      ariaHideApp={false} 
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center text-teal-600 font-semibold text-xl">
@@ -67,7 +80,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
         </button>
       </div>
 
-      <Form submitHandler={onSubmit}>
+      <Form submitHandler={onSubmit} defaultValues={defaultValues}>
         <div className="w-full mb-4">
           <FormInput name="title" label="Title" className="w-full" />
         </div>
@@ -91,12 +104,12 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
           <select
             id="assignee"
             name="assignee"
-            className="mt-2 w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
+            className="mt-2 w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
             value={assignee}
             onChange={(e) => setAssignee(e.target.value)}
           >
-            <option value="">All Assignees</option>
-            {members.map((member) => (
+            <option value="">Select Assignee</option>
+            {members.map((member: string) => (
               <option key={member} value={member}>
                 {member}
               </option>
@@ -112,11 +125,11 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
           type="submit"
           className="mt-4 py-2 px-4 rounded-md font-semibold text-white bg-teal-600 hover:bg-teal-700 transition-colors duration-300 w-full"
         >
-          Add Task
+          Save Changes
         </button>
       </Form>
     </ReactModal>
   );
 };
 
-export default AddTaskModal;
+export default UpdateTaskModal;

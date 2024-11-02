@@ -56,7 +56,7 @@ const ProjectDetails = () => {
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     if (statusFilter && task.status !== statusFilter) return false;
     if (dueDateFilter && task.dueDate !== dueDateFilter) return false;
-    if (assigneeFilter && task.member !== assigneeFilter) return false;
+    if (assigneeFilter && task.assignee !== assigneeFilter) return false;
     return true;
   });
 
@@ -114,7 +114,7 @@ const ProjectDetails = () => {
             />
           </div>
 
-          <TaskList filteredTasks={filteredTasks} onTaskAdded={handleAddTask} />
+          <TaskList filteredTasks={filteredTasks} onTaskAdded={handleAddTask} id={id} />
           <TaskManagement tasks={filteredTasks} onTaskAdded={handleAddTask} />
 
           <TeamMember teamMembers={teamMembers} />

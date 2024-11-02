@@ -77,7 +77,7 @@ export type Task = {
     dueDate: string;
     status: string;
     isCompleted: boolean;
-    member: string;
+    assignee: string;
     serviceId: string;
   }
   export const projectPhases: ProjectPhase[] = [
@@ -88,7 +88,7 @@ export type Task = {
       dueDate: "2024-10-27",
       status: "Done",
       isCompleted: true,
-      member: "Alice",
+      assignee: "Alice",
       serviceId: "1",
     },
     {
@@ -98,7 +98,7 @@ export type Task = {
       dueDate: "2024-10-28",
       status: "To Do",
       isCompleted: false,
-      member: "Bob",
+      assignee: "Bob",
       serviceId: "2",
     },
     {
@@ -108,17 +108,17 @@ export type Task = {
       dueDate: "2024-10-30",
       status: "In Progress",
       isCompleted: false,
-      member: "Charlie",
+      assignee: "Charlie",
       serviceId: "3",
     },
     {
       id: 4,
       title: "Quality Assurance and Testing",
-      description: "Assign testing tasks to QA team members to conduct for Service 4.",
+      description: "Assign testing tasks to QA team assignees to conduct for Service 4.",
       dueDate: "2024-10-31",
       status: "In Progress",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     {
@@ -128,7 +128,7 @@ export type Task = {
       dueDate: "2024-10-29",
       status: "To Do",
       isCompleted: false,
-      member: "Eve",
+      assignee: "Eve",
       serviceId: "5",
     },
     // Additional tasks for ID 1
@@ -139,7 +139,7 @@ export type Task = {
       dueDate: "2024-10-28",
       status: "Done",
       isCompleted: true,
-      member: "Alice",
+      assignee: "Alice",
       serviceId: "1",
     },
     {
@@ -149,7 +149,7 @@ export type Task = {
       dueDate: "2024-10-29",
       status: "Done",
       isCompleted: true,
-      member: "Alice",
+      assignee: "Alice",
       serviceId: "1",
     },
     {
@@ -159,7 +159,7 @@ export type Task = {
       dueDate: "2024-10-30",
       status: "Done",
       isCompleted: true,
-      member: "Alice",
+      assignee: "Alice",
       serviceId: "1",
     },
     {
@@ -169,7 +169,7 @@ export type Task = {
       dueDate: "2024-10-31",
       status: "To Do",
       isCompleted: false,
-      member: "Alice",
+      assignee: "Alice",
       serviceId: "1",
     },
     {
@@ -179,7 +179,7 @@ export type Task = {
       dueDate: "2024-11-01",
       status: "To Do",
       isCompleted: false,
-      member: "Alice",
+      assignee: "Alice",
       serviceId: "1",
     },
     // Additional tasks for ID 2
@@ -190,7 +190,7 @@ export type Task = {
       dueDate: "2024-10-29",
       status: "To Do",
       isCompleted: false,
-      member: "Bob",
+      assignee: "Bob",
       serviceId: "2",
     },
     {
@@ -200,7 +200,7 @@ export type Task = {
       dueDate: "2024-10-30",
       status: "To Do",
       isCompleted: false,
-      member: "Bob",
+      assignee: "Bob",
       serviceId: "2",
     },
     {
@@ -210,7 +210,7 @@ export type Task = {
       dueDate: "2024-10-31",
       status: "To Do",
       isCompleted: false,
-      member: "Bob",
+      assignee: "Bob",
       serviceId: "2",
     },
     // Additional tasks for ID 3
@@ -221,7 +221,7 @@ export type Task = {
       dueDate: "2024-10-31",
       status: "In Progress",
       isCompleted: false,
-      member: "Charlie",
+      assignee: "Charlie",
       serviceId: "3",
     },
     {
@@ -231,7 +231,7 @@ export type Task = {
       dueDate: "2024-11-02",
       status: "To Do",
       isCompleted: false,
-      member: "Charlie",
+      assignee: "Charlie",
       serviceId: "3",
     },
     {
@@ -241,7 +241,7 @@ export type Task = {
       dueDate: "2024-11-03",
       status: "To Do",
       isCompleted: false,
-      member: "Charlie",
+      assignee: "Charlie",
       serviceId: "3",
     },
     {
@@ -251,7 +251,7 @@ export type Task = {
       dueDate: "2024-11-04",
       status: "To Do",
       isCompleted: false,
-      member: "Charlie",
+      assignee: "Charlie",
       serviceId: "3",
     },
     // Additional tasks for ID 4
@@ -262,7 +262,7 @@ export type Task = {
       dueDate: "2024-10-30",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     {
@@ -272,7 +272,7 @@ export type Task = {
       dueDate: "2024-11-01",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     {
@@ -282,7 +282,7 @@ export type Task = {
       dueDate: "2024-11-02",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     {
@@ -292,7 +292,7 @@ export type Task = {
       dueDate: "2024-11-03",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     {
@@ -302,7 +302,7 @@ export type Task = {
       dueDate: "2024-11-04",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     // Additional tasks for ID 4 if it already has 5 tasks
@@ -313,7 +313,7 @@ export type Task = {
       dueDate: "2024-11-05",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
     {
@@ -323,7 +323,7 @@ export type Task = {
       dueDate: "2024-11-06",
       status: "To Do",
       isCompleted: false,
-      member: "David",
+      assignee: "David",
       serviceId: "4",
     },
   ];
