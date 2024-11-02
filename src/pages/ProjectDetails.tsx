@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import TaskList from '../components/TaskList/Tasklist';
 import TaskManagement from '../components/TaskManagement/TaskManagement';
 import TeamMember from '../components/TeamMember/TeamMember';
+import GanttChart from '../components/GanttChart/GanttChart';
 
 const ProjectDetails = () => {
   const { id } = useParams(); 
@@ -49,7 +50,7 @@ const ProjectDetails = () => {
     loadTasks(); // Reload all tasks
   };
 
-  const filteredTasks = tasks.filter((task: any) => {
+  const filteredTasks:any = tasks.filter((task: any) => {
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     if (statusFilter && task.status !== statusFilter) return false;
     if (dueDateFilter && task.dueDate !== dueDateFilter) return false;
@@ -118,6 +119,8 @@ const ProjectDetails = () => {
 
           <TaskList filteredTasks={filteredTasks} onTaskAdded={handleAddTask} id={id} />
           <TaskManagement tasks={filteredTasks} onTaskAdded={handleAddTask} />
+
+          <GanttChart filteredTasks={filteredTasks} />
 
           <TeamMember teamMembers={teamMembers} />
         </div>
