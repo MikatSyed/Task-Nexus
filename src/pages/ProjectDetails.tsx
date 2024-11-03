@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import AddTaskModal from '../components/AddTaskModal/AddTaskModal';
 import { projectData, Task, teamMembers } from '../utils/data';

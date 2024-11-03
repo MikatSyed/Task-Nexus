@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { MdRefresh } from 'react-icons/md';
 
 const FilterSection = ({

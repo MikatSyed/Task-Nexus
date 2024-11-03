@@ -22,7 +22,7 @@ const FormInput = ({
   value,
   id,
   placeholder,
-  validation,
+
   label,
   className = "",
 }: IInput) => {

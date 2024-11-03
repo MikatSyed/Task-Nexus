@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import { useTaskStore } from "../../stores/taskStore";
 
@@ -70,6 +69,7 @@ const TaskManagement = ({ tasks, onTaskAdded }: any) => {
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>, card: Card) => {
+    console.log(event)
     setDraggedCard(card);
   };
 

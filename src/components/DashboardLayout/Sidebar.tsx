@@ -1,7 +1,7 @@
 // src/components/Sidebar.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { MdDashboard, MdRestaurantMenu, MdPerson, MdExitToApp } from 'react-icons/md';
+import { MdDashboard, MdExitToApp } from 'react-icons/md';
 import { FiCheckSquare, FiX } from 'react-icons/fi';
 
 
@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
         
             <li>
               <Link
-                to="/dashboard/project"
+                to="/"
                 className={`flex items-center p-4 hover:text-teal-500 mx-2 ${
                   activeItem === 'project' ? 'bg-gray-700 rounded-md mx-2  p-4' : ''
                 }`}

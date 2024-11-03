@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BiBookmark, BiEditAlt } from 'react-icons/bi';
 import { FaBookmark } from 'react-icons/fa';
 import { FiClock, FiUser } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { useTaskStore } from '../../stores/taskStore';
-import { Link } from 'react-router-dom';
 import UpdateTaskModal from '../UpdateTaskModal/UpdateTaskModal';
 import { teamMembers } from '../../utils/data';
 import { Toaster } from 'react-hot-toast';

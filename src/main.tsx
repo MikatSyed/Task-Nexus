@@ -1,9 +1,7 @@
-import React from "react";
+
 import ReactDOM from "react-dom/client";
-import App from "./App"; 
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Dashboard from "./pages/Dashboard.tsx";
 import Project from "./pages/Project.tsx";
 import DashboardLayout from "./components/DashboardLayout/DashboardLayout.tsx";
 import ProjectDetails from "./pages/ProjectDetails.tsx";
@@ -11,27 +9,17 @@ import ProjectDetails from "./pages/ProjectDetails.tsx";
 
 // Define router with correct TypeScript types
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
+ 
   // Add other routes if needed and ensure any imported components are correctly typed
   {
-    path: "/dashboard",
-    element: (
-      <DashboardLayout>
-        <Dashboard />
-      </DashboardLayout>
-    ),
-  },
-  {
-    path: "/dashboard/project",
+    path: "/",
     element: (
       <DashboardLayout>
         <Project />
       </DashboardLayout>
     ),
   },
+ 
   {
     path: "/dashboard/project/view/:id",
     element: (

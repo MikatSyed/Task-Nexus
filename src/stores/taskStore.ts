@@ -40,14 +40,6 @@ interface TaskState {
 // Function to get the next ID for new tasks
 const getNextId = (tasks: Task[]) => tasks.reduce((max, task) => Math.max(max, task.id), 0) + 1;
 
-// Check if local storage is available
-const isLocalStorageAvailable = (): boolean => {
-  try {
-    return 'localStorage' in window && window.localStorage !== null;
-  } catch {
-    return false;
-  }
-};
 
 // Load data from local storage with a fallback option
 export const loadFromLocalStorage = <T>(key: string, fallback: T): T => {

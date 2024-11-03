@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { projectData, projectPhases } from "../utils/data";
 import Pagination from "../components/Pagination/Pagination";
@@ -21,23 +21,23 @@ const Project = () => {
     const isFirstVisit = !localStorage.getItem(`projectPhasesAdded_${projectId}`);
 
     if (isFirstVisit && projectId) {
-      // Use projectId to define the desired serviceId
-      const desiredServiceId = projectId; // This assumes projectId directly corresponds to serviceId
+     
+      const desiredServiceId = projectId; 
     
       for (const phase of projectPhases) {
-        // Check if the phase's serviceId matches the desiredServiceId and if a task already exists
+        
         const taskExists = tasks.some((task: any) => task.id === phase.id);
         if (!taskExists && phase.serviceId === desiredServiceId) {
-          await addTask(phase as any); // Add the phase as a task if it does not already exist
+          await addTask(phase as any);
         }
       }
     
-      // Mark that the project phases were added for this projectId
+     
       localStorage.setItem(`projectPhasesAdded_${projectId}`, "true"); 
-      // Redirect to the project view
+      
       navigate(`/dashboard/project/view/${projectId}`);
     } else {
-      // Redirect to the project view if not the first visit or projectId is not set
+     
       navigate(`/dashboard/project/view/${projectId}`);
     }
     

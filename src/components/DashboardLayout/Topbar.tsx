@@ -1,9 +1,9 @@
 // src/components/Topbar.tsx
-import React, { useState, useRef, useEffect } from 'react';
-import { FiMenu, FiX, FiBell } from 'react-icons/fi';
+import React, { useState, useRef } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
 import { TfiWorld } from 'react-icons/tfi';
 import { useClickAway } from 'react-use';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,14 +12,11 @@ interface TopbarProps {
   onToggleSidebar: () => void;
 }
 
-interface UserData {
-  photoURL?: string;
-}
+
 
 const Topbar: React.FC<TopbarProps> = ({ isSidebarOpen, onToggleSidebar }) => {
-  const navigate = useNavigate();
+
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
-  const [userData, setUserData] = useState<UserData | null>(null);
   const profileButtonRef = useRef<HTMLButtonElement | null>(null);
   const profileMenuRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,11 +30,6 @@ const Topbar: React.FC<TopbarProps> = ({ isSidebarOpen, onToggleSidebar }) => {
     setIsProfileOpen((prev) => !prev);
   };
 
-  const handleLogout = () => {
-
-    setUserData(null);
-    navigate('/');
-  };
 
   return (
     <header className="bg-white">
@@ -54,7 +46,7 @@ const Topbar: React.FC<TopbarProps> = ({ isSidebarOpen, onToggleSidebar }) => {
         </div>
 
         <div className="flex items-center space-x-3">
-          <Link to="/dashboard/project">
+          <Link to="/">
             <button className="p-2 rounded-full hover:text-blue-600 text-gray-500 flex items-center text-sm">
               <TfiWorld className="w-4 h-4 mr-2" />
               <span className="text-xs">View Site</span>
