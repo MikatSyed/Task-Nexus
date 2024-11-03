@@ -37,6 +37,7 @@ React Chart (or a similar library) for Gantt Chart visualization.
 Installation & Setup
 
 Prerequisites
+
 Node.js and Yarn should be installed on your system.
 Steps
 
@@ -52,6 +53,7 @@ bash
 yarn 
 
 Run the development server:
+
 bash
 yarn dev
 
