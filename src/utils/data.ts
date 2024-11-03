@@ -98,6 +98,7 @@ export type Task = {
     isCompleted: boolean;
     assignee: string;
     serviceId: string;
+    priority:string;
   }
   export const projectPhases: ProjectPhase[] = [
     {
@@ -109,6 +110,7 @@ export type Task = {
       isCompleted: true,
       assignee: "Alice",
       serviceId: "1",
+      priority: "High",
     },
     {
       id: 2,
@@ -119,6 +121,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Bob",
       serviceId: "2",
+      priority: "Medium",
     },
     {
       id: 3,
@@ -129,6 +132,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Charlie",
       serviceId: "3",
+      priority: "High",
     },
     {
       id: 4,
@@ -139,6 +143,7 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "High",
     },
     {
       id: 5,
@@ -149,8 +154,9 @@ export type Task = {
       isCompleted: false,
       assignee: "Eve",
       serviceId: "5",
+      priority: "Low",
     },
-    // Additional tasks for ID 1
+    // Additional tasks for Service 1
     {
       id: 6,
       title: "Stakeholder Interviews",
@@ -160,6 +166,7 @@ export type Task = {
       isCompleted: true,
       assignee: "Alice",
       serviceId: "1",
+      priority: "Medium",
     },
     {
       id: 7,
@@ -170,6 +177,7 @@ export type Task = {
       isCompleted: true,
       assignee: "Alice",
       serviceId: "1",
+      priority: "Medium",
     },
     {
       id: 8,
@@ -180,6 +188,7 @@ export type Task = {
       isCompleted: true,
       assignee: "Alice",
       serviceId: "1",
+      priority: "High",
     },
     {
       id: 9,
@@ -190,6 +199,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Alice",
       serviceId: "1",
+      priority: "Medium",
     },
     {
       id: 10,
@@ -200,8 +210,9 @@ export type Task = {
       isCompleted: false,
       assignee: "Alice",
       serviceId: "1",
+      priority: "High",
     },
-    // Additional tasks for ID 2
+    // Additional tasks for Service 2
     {
       id: 11,
       title: "Wireframe Creation",
@@ -211,6 +222,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Bob",
       serviceId: "2",
+      priority: "Medium",
     },
     {
       id: 12,
@@ -221,6 +233,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Bob",
       serviceId: "2",
+      priority: "High",
     },
     {
       id: 13,
@@ -231,8 +244,9 @@ export type Task = {
       isCompleted: false,
       assignee: "Bob",
       serviceId: "2",
+      priority: "High",
     },
-    // Additional tasks for ID 3
+    // Additional tasks for Service 3
     {
       id: 14,
       title: "Backend Development",
@@ -242,6 +256,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Charlie",
       serviceId: "3",
+      priority: "High",
     },
     {
       id: 15,
@@ -252,6 +267,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Charlie",
       serviceId: "3",
+      priority: "Medium",
     },
     {
       id: 16,
@@ -262,6 +278,7 @@ export type Task = {
       isCompleted: false,
       assignee: "Charlie",
       serviceId: "3",
+      priority: "High",
     },
     {
       id: 17,
@@ -272,8 +289,9 @@ export type Task = {
       isCompleted: false,
       assignee: "Charlie",
       serviceId: "3",
+      priority: "Medium",
     },
-    // Additional tasks for ID 4
+    // Additional tasks for Service 4
     {
       id: 18,
       title: "Test Case Development",
@@ -283,6 +301,7 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "High",
     },
     {
       id: 19,
@@ -293,6 +312,7 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "High",
     },
     {
       id: 20,
@@ -303,6 +323,7 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "Medium",
     },
     {
       id: 21,
@@ -313,6 +334,7 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "High",
     },
     {
       id: 22,
@@ -323,8 +345,8 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "Low",
     },
-    // Additional tasks for ID 4 if it already has 5 tasks
     {
       id: 23,
       title: "Final Approval of Test Results",
@@ -334,6 +356,7 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "Medium",
     },
     {
       id: 24,
@@ -344,8 +367,10 @@ export type Task = {
       isCompleted: false,
       assignee: "David",
       serviceId: "4",
+      priority: "Low",
     },
   ];
+  
   
 
  
