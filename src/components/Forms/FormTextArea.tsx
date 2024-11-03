@@ -1,5 +1,6 @@
 "use client";
 import { useFormContext, Controller } from 'react-hook-form';
+import { getErrorMessageByPropertyName } from '../../utils/schema-validator';
 
 type TextAreaProps = {
   name: string;
@@ -18,8 +19,8 @@ const FormTextArea = ({
   placeholder,
   className = ''
 }: TextAreaProps) => {
-  const { control } = useFormContext();
-
+  const { control, formState: { errors } } = useFormContext();
+  const errorMessage = getErrorMessageByPropertyName(errors, name);
   return (
     <>
       {label && (
@@ -40,7 +41,8 @@ const FormTextArea = ({
             defaultValue={value ?? field.value}
           />
         )}
-      />
+        />
+        {errorMessage && <small className="text-red-500 mt-1 block">{errorMessage}</small>}
     </>
   );
 };

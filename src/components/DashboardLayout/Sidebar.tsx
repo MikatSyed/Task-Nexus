@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdDashboard, MdRestaurantMenu, MdPerson, MdExitToApp } from 'react-icons/md';
-import { FiX } from 'react-icons/fi';
+import { FiCheckSquare, FiX } from 'react-icons/fi';
 
 
 interface SidebarProps {
@@ -34,33 +34,24 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       } md:translate-x-0`}
     >
       <div className="flex flex-col h-full">
-        <div className="text-center py-4 border-b border-gray-700 relative">
-          <img
-            src="https://foodhub.modeltheme.com/wp-content/themes/foodhub/images/logo.png"
-            alt="Logo"
-            className="h-[30px] w-[150px] ml-2"
-          />
-          <button
-            onClick={onToggle}
-            className="absolute top-4 right-4 text-white hover:text-gray-200 md:hidden"
-          >
-            <FiX size={24} />
-          </button>
-        </div>
+     
+
+<div className="text-center py-5 px-4 border-b border-gray-700 relative">
+  <h2 className="flex items-center justify-start space-x-2 text-2xl font-semibold italic text-white">
+    <FiCheckSquare className="text-white" size={28} />
+    <span>Task Nexus</span>
+  </h2>
+  <button
+    onClick={onToggle}
+    className="absolute top-4 right-4 text-white hover:text-gray-200 md:hidden"
+  >
+    <FiX size={24} />
+  </button>
+</div>
+
         <nav className="mt-6 flex-1">
           <ul>
-          <li>
-              <Link
-                to="/dashboard"
-                className={`flex items-center p-4 hover:text-teal-500 mx-2 ${
-                  activeItem === 'dashboard' ? 'bg-gray-700 rounded-md mx-2  p-4' : ''
-                }`}
-                onClick={() => handleItemClick('dashboard')}
-              >
-                <MdRestaurantMenu className="text-lg mr-3" />
-                <span>Dashboard</span>
-              </Link>
-            </li>
+        
             <li>
               <Link
                 to="/dashboard/project"
@@ -69,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
                 }`}
                 onClick={() => handleItemClick('project')}
               >
-                <MdRestaurantMenu className="text-lg mr-3" />
+                <MdDashboard className="text-lg mr-3" />
                 <span>Project</span>
               </Link>
             </li>

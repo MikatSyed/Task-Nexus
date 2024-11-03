@@ -57,10 +57,10 @@ const GanttChart: React.FC<GanttChartProps> = ({ filteredTasks }) => {
     };
 
     return (
-        <div className="overflow-x-auto mt-20 bg-white p-4 rounded-md">
+        <div className="overflow-x-auto my-20 bg-white p-4 rounded-md ">
             <div className="relative">
                 <div className="flex flex-col md:flex-row justify-between font-bold border-gray-300 pb-4">
-                    <div className="w-full text-2xl text-left">Gantt Chart</div>
+                    <div className="text-3xl font-bold mb-4 text-gray-800">Gantt Chart</div>
                 </div>
 
                 <div className="mt-2">

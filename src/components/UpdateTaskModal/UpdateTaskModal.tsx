@@ -31,13 +31,13 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
 }) => {
   const loadedTasks: Task[] = loadFromLocalStorage('tasks', []);
   const task: any = loadedTasks.find((task: any) => task.id === taskId);
-  
+  console.log(task,'34')
   const [assignee, setAssignee] = useState<string>(task?.assignee);
-  const [priority, setPriority] = useState<string>(task?.priority || ''); // State for priority
+  const [priority, setPriority] = useState<string>(task?.priority || ''); 
 
   const onSubmit = async (values: any) => {
-    values.assignee = assignee;
-    values.priority = priority; // Include priority in the values
+    values.assignee = assignee || task?.assignee;
+    values.priority = priority || task?.priority; 
     values.status = values.status || task?.status;
     values.serviceId = projectId;
     const toastId = toast.loading('Updating...');
@@ -54,12 +54,22 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
     }
   };
 
+  useEffect(() => {
+    // Initialize assignee and priority when modal is opened with task data
+    if (visible && task) {
+      setAssignee(task.assignee || '');
+      setPriority(task.priority || '');
+    }
+  }, [visible]);
+
   const defaultValues = {
     title: task?.title || '',
     description: task?.description || '',
     dueDate: task?.dueDate || '',
+    assignee: task?.assignee || '',
+    priority: task?.priority || '',
   };
-
+console.log(assignee,'63')
   return (
     <ReactModal
       isOpen={visible}
@@ -68,7 +78,7 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
       className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg mx-auto outline-none"
       ariaHideApp={false}
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center text-teal-600 font-semibold text-xl">
           <MdOutlineAddTask className="mr-2" size={22} />
           {title}
@@ -79,11 +89,11 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
       </div>
 
       <Form submitHandler={onSubmit} defaultValues={defaultValues}>
-        <div className="w-full mb-4">
+        <div className="w-full mb-2">
           <FormInput name="title" label="Title" className="w-full" />
         </div>
 
-        <div className="w-full mb-4">
+        <div className="w-full mb-2">
           <FormTextArea
             name="description"
             label="Description"
@@ -92,7 +102,7 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
           />
         </div>
 
-        <div className="w-full mb-4">
+        <div className="w-full mb-2">
           <label
             htmlFor="assignee"
             className="block text-sm font-medium text-gray-600"
@@ -115,7 +125,7 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
           </select>
         </div>
 
-        <div className="w-full mb-4">
+        <div className="w-full mb-2">
           <label
             htmlFor="priority"
             className="block text-sm font-medium text-gray-600"
@@ -127,6 +137,7 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
             name="priority"
             className="mt-2 w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-gray-700"
             value={priority}
+            defaultValue={task?.priority}
             onChange={(e) => setPriority(e.target.value)}
           >
             <option value="">Select Priority</option>
@@ -136,7 +147,7 @@ const UpdateTaskModal: React.FC<AddTaskModalProps> = ({
           </select>
         </div>
 
-        <div className="w-full mb-4">
+        <div className="w-full mb-2">
           <FormDatePicker name="dueDate" label="Due Date" />
         </div>
 

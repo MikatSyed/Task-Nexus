@@ -7,7 +7,6 @@ import FilterSection from '../components/FilterSection/FilterSection';
 import { useParams } from 'react-router-dom';
 import TaskList from '../components/TaskList/Tasklist';
 import TaskManagement from '../components/TaskManagement/TaskManagement';
-import TeamMember from '../components/TeamMember/TeamMember';
 import GanttChart from '../components/GanttChart/GanttChart';
 
 const ProjectDetails = () => {
@@ -46,8 +45,8 @@ const ProjectDetails = () => {
     setStatusFilter('');
     setDueDateFilter('');
     setAssigneeFilter('');
-    setPriorityFilter(''); // Reset priority filter
-    loadTasks(); // Reload all tasks
+    setPriorityFilter(''); 
+    loadTasks(); 
   };
 
   const filteredTasks:any = tasks.filter((task: any) => {
@@ -55,7 +54,7 @@ const ProjectDetails = () => {
     if (statusFilter && task.status !== statusFilter) return false;
     if (dueDateFilter && task.dueDate !== dueDateFilter) return false;
     if (assigneeFilter && task.assignee !== assigneeFilter) return false;
-    if (priorityFilter && task.priority !== priorityFilter) return false; // Filter by priority
+    if (priorityFilter && task.priority !== priorityFilter) return false; 
     return true;
   });
 
@@ -122,7 +121,7 @@ const ProjectDetails = () => {
 
           <GanttChart filteredTasks={filteredTasks} />
 
-          <TeamMember teamMembers={teamMembers} />
+         
         </div>
       </div>
     </>
