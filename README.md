@@ -50,11 +50,13 @@ cd project-management-ui
 Install dependencies:
 
 bash
+
 yarn 
 
 Run the development server:
 
 bash
+
 yarn dev
 
 
